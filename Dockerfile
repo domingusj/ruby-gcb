@@ -20,6 +20,7 @@ RUN set -ex && \
             procps \
             yaml-dev \
             zlib-dev \
+            mariadb \
             git && \
     { \
       echo 'install: --no-document'; \
