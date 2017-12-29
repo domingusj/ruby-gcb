@@ -1,0 +1,25 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        docker pull us.gcr.io/${PROJECT_ID}/ruby-test:cache && \
+        docker build --cache-from us.gcr.io/${PROJECT_ID}/ruby-test -t us.gcr.io/${PROJECT_ID}/ruby-test:latest .
+    id: 'build'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+    - -c
+    - |
+      docker run --rm us.gcr.io/${PROJECT_ID}/ruby-test:latest bundle exec rspec
+    id: 'test'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        docker push us.gcr.io/${PROJECT_ID}/ruby-test:latest
+    id: 'publish'
