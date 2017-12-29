@@ -5,7 +5,7 @@ steps:
       - -c
       - |
         docker pull us.gcr.io/${PROJECT_ID}/ruby-test:cache && \
-        docker build --cache-from us.gcr.io/${PROJECT_ID}/ruby-test -t us.gcr.io/${PROJECT_ID}/ruby-test:latest .
+        docker build --cache-from us.gcr.io/${PROJECT_ID}/ruby-test:cache -t us.gcr.io/${PROJECT_ID}/ruby-test:latest .
     id: 'build'
 
   - name: 'gcr.io/cloud-builders/docker'
